@@ -33,7 +33,7 @@ def show_store(name):
     for store in stores:
         if store['name'] == name :
             return jsonify(store)
-    return("The store not found!")
+    return(jsonify({'message':'store not found'}))
 # GET /stores
 @app.route('/store')
 def get_stores():
@@ -49,6 +49,6 @@ def get_items_in_store(name):
     for store in stores:
         if store['name'] == name:
             return(jsonify({'items':store['items']}))
-    return("The store not found")
+    return(jsonify({'message':'store not found'}))
 
 app.run(port=5000)
