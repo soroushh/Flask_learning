@@ -11,6 +11,8 @@ stores = [
 }
 ]
 
+people = []
+
 
 
 # POST - used to receive data
@@ -59,5 +61,18 @@ def get_items_in_store(name):
         if store['name'] == name:
             return(jsonify({'items':store['items']}))
     return(jsonify({'message':'store not found'}))
+
+#POST method to make a new person
+@app.route('/person/new', methods=['POST'])
+def create_person():
+    request_data = request.get_json()
+    new_person = {
+
+      "name": request_data["name"],
+      "family" : request_data["family"]
+    }
+    people.append(new_person)
+    return(jsonify({"people":people}))
+
 
 app.run(port=5000)
