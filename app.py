@@ -73,6 +73,13 @@ def create_person():
     }
     people.append(new_person)
     return(jsonify({"people":people}))
-
-
+@app.route('/person')
+def find_person():
+    name = request.args.get('name')
+    family = request.args.get('family')
+    for person in people:
+        if person["name"]== name and person["family"]== family:
+            return(jsonify({"name":name, "family":family}))
+    return(jsonify({"message":"person not found"}))
+    
 app.run(port=5000)
